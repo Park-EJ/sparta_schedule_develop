@@ -17,16 +17,25 @@ public class User extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String password;
+//    @Column(nullable = false)
+//    private String password;
 
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
-        this.password = password;
     }
 
+//    public User(String username, String email, String password) {
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//    }
+
+    public void updateById(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
 }
