@@ -2,6 +2,8 @@ package com.example.scheduledevelop.controller;
 
 import com.example.scheduledevelop.dto.UserRequestDto;
 import com.example.scheduledevelop.dto.UserResponseDto;
+import com.example.scheduledevelop.dto.UserSignUpRequestDto;
+import com.example.scheduledevelop.dto.UserSignUpResponseDto;
 import com.example.scheduledevelop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,11 +19,13 @@ public class UserController {
 
     private final UserService userService;
 
-    // User 생성
-    @PostMapping
-    public ResponseEntity<UserResponseDto> save(@RequestBody UserRequestDto requestDto) {
-        UserResponseDto userResponseDto = userService.save(requestDto.getUsername(), requestDto.getEmail());
-        return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
+
+    // User 회원가입
+    @PostMapping("/signup")
+    public ResponseEntity<UserSignUpResponseDto> signUp(@RequestBody UserSignUpRequestDto requestDto) {
+        UserSignUpResponseDto userSignUpResponseDto =
+                userService.signUp(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
+        return new ResponseEntity<>(userSignUpResponseDto, HttpStatus.CREATED);
     }
 
     // User 전체 조회
@@ -51,16 +55,6 @@ public class UserController {
         userService.deleteById(id);
     }
 
-
-
-
-//    @PostMapping("/signup")
-//    public ResponseEntity<UserSignUpResponseDto> signUp(@RequestBody UserSignUpRequestDto requestDto) {
-//        UserSignUpResponseDto userSignUpResponseDto =
-//                userService.signUp(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
-//        return new ResponseEntity<>(userSignUpResponseDto, HttpStatus.CREATED);
-//    }
-//
 
 
 }

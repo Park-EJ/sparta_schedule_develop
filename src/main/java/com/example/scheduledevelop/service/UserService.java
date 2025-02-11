@@ -1,6 +1,7 @@
 package com.example.scheduledevelop.service;
 
 import com.example.scheduledevelop.dto.UserResponseDto;
+import com.example.scheduledevelop.dto.UserSignUpResponseDto;
 import com.example.scheduledevelop.entity.User;
 import com.example.scheduledevelop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +20,12 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public UserResponseDto save(String username, String email) {
-        User user = new User(username, email);
+    public UserSignUpResponseDto signUp(String username, String email, String password) {
+        User user = new User(username, email, password);
 
         User savedUser = userRepository.save(user);
 
-        return new UserResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
+        return new UserSignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
     }
 
     @Transactional(readOnly = true)
@@ -65,15 +66,5 @@ public class UserService {
 
         userRepository.deleteById(id);
     }
-
-
-//    public UserSignUpResponseDto signUp(String username, String email, String password) {
-//        User user = new User(username, email, password);
-//
-//        User savedUser = userRepository.save(user);
-//
-//        return new UserSignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
-//    }
-
 
 }
