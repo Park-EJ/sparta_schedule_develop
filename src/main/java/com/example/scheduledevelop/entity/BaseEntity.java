@@ -1,4 +1,4 @@
-package com.example.scheduledevelop.dto;
+package com.example.scheduledevelop.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
