@@ -20,9 +20,9 @@ public class Schedule extends BaseEntity {
     @Column(columnDefinition = "Longtext")
     private String contents;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Schedule() {
     }
@@ -39,7 +39,7 @@ public class Schedule extends BaseEntity {
         this.contents = contents;
     }
 
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
