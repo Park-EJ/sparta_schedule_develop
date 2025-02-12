@@ -3,6 +3,7 @@ package com.example.scheduledevelop.controller;
 import com.example.scheduledevelop.dto.*;
 import com.example.scheduledevelop.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class UserController {
 
     // User 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<UserSignUpResponseDto> signUp(@RequestBody UserSignUpRequestDto requestDto) {
+    public ResponseEntity<UserSignUpResponseDto> signUp(@Valid @RequestBody UserSignUpRequestDto requestDto) {
         UserSignUpResponseDto userSignUpResponseDto =
                 userService.signUp(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
         return new ResponseEntity<>(userSignUpResponseDto, HttpStatus.CREATED);

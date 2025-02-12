@@ -6,10 +6,12 @@ import com.example.scheduledevelop.dto.UserSignUpResponseDto;
 import com.example.scheduledevelop.entity.User;
 import com.example.scheduledevelop.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -17,12 +19,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Validated
 public class UserService {
 
     private final UserRepository userRepository;
 
     @Transactional
-    public UserSignUpResponseDto signUp(String username, String email, String password) {
+    public UserSignUpResponseDto signUp(@Valid String username, String email, String password) {
         User user = new User(username, email, password);
 
         User savedUser = userRepository.save(user);
