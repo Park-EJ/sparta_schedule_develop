@@ -2,9 +2,11 @@ package com.example.scheduledevelop.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "schedule")
 public class Schedule extends BaseEntity {
 
@@ -18,12 +20,9 @@ public class Schedule extends BaseEntity {
     @Column(nullable = false)
     private String contents;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    public Schedule() {
-    }
 
     public Schedule(User user, String title, String contents) {
         this.user = user;

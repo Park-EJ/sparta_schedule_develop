@@ -50,7 +50,7 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public ScheduleResponseDto findById(Long id) {
             Schedule findSchedule = scheduleRepository.findById(id).orElseThrow(
-                    () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exists id : " + id));
+                    () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 ID가 존재하지 않습니다."));
 
             return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getUser().getUsername(), findSchedule.getTitle(), findSchedule.getContents());
     }
@@ -68,7 +68,7 @@ public class ScheduleService {
     @Transactional
     public void deleteById(Long id) {
         if (!scheduleRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exists id : " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 ID가 존재하지 않습니다.");
         }
 
         scheduleRepository.deleteById(id);

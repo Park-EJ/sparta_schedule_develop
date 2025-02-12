@@ -1,10 +1,8 @@
 package com.example.scheduledevelop.controller;
 
-import com.example.scheduledevelop.dto.UserRequestDto;
-import com.example.scheduledevelop.dto.UserResponseDto;
-import com.example.scheduledevelop.dto.UserSignUpRequestDto;
-import com.example.scheduledevelop.dto.UserSignUpResponseDto;
+import com.example.scheduledevelop.dto.*;
 import com.example.scheduledevelop.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,4 +51,18 @@ public class UserController {
     public void deleteById(@PathVariable Long id) {
         userService.deleteById(id);
     }
+
+    // 로그인
+    @PutMapping("/login")
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserSignUpRequestDto requestDto, HttpSession session) {
+        UserLoginResponseDto userLoginResponseDto = userService.login(requestDto.getEmail(), requestDto.getPassword(), session);
+    return new ResponseEntity<>(userLoginResponseDto, HttpStatus.OK);
+    }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public void logout(HttpSession session) {
+        userService.logout(session);
+    }
+
 }
