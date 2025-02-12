@@ -19,7 +19,6 @@ public class UserController {
 
     private final UserService userService;
 
-
     // User 회원가입
     @PostMapping("/signup")
     public ResponseEntity<UserSignUpResponseDto> signUp(@RequestBody UserSignUpRequestDto requestDto) {

@@ -51,12 +51,4 @@ public class ScheduleController {
         scheduleService.deleteById(id);
     }
 
-//    @PostMapping
-//    public ResponseEntity<ScheduleResponseDto> save(@RequestBody ScheduleRequestDto requestDto) {
-//        ScheduleResponseDto scheduleResponseDto =
-//                scheduleService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getUsername());
-//
-//        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
-//    }
-
 }
