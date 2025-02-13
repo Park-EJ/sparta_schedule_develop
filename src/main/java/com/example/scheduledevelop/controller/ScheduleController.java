@@ -40,8 +40,8 @@ public class ScheduleController {
 
     // Schedule 수정
     @PutMapping("/{id}")
-    public ResponseEntity<ScheduleResponseDto> updateByUsername(@RequestBody ScheduleRequestDto requestDto) {
-        ScheduleResponseDto scheduleResponseDto = scheduleService.updateByUsername(requestDto.getUsername(), requestDto.getTitle(), requestDto.getContents());
+    public ResponseEntity<ScheduleResponseDto> updateByUsername(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
+        ScheduleResponseDto scheduleResponseDto = scheduleService.updateByUsername(id, requestDto.getUsername(), requestDto.getTitle(), requestDto.getContents());
         return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
     }
 

@@ -75,10 +75,10 @@ public class UserService {
     @Transactional
     public UserLoginResponseDto login(String email, String password, HttpSession session) {
         User findUser = userRepository.findByEmail(email).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 Email이 존재하지 않습니다."));
+                () -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "해당 Email이 존재하지 않습니다."));
 
         if (!findUser.getPassword().equals(password)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "비밀번호가 일치하지 않습니다.");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
         session.setAttribute("USER", findUser);
 

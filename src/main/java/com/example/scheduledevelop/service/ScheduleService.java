@@ -56,13 +56,15 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleResponseDto updateByUsername(String username, String title, String contents) {
+    public ScheduleResponseDto updateByUsername(Long id, String username, String title, String contents) {
         User findUser = userRepository.findUsersByUsernameOrElseThrow(username);
 
-        Schedule schedule = new Schedule(title, contents);
-        schedule.setUser(findUser);
+        Schedule findSchedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 ID가 존재하지 않습니다."));
 
-        return new ScheduleResponseDto(schedule.getId(), schedule.getUser().getUsername(), schedule.getTitle(), schedule.getContents());
+        findSchedule.updateByUsername(findUser, title, contents);
+
+        return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getUser().getUsername(), findSchedule.getTitle(), findSchedule.getContents());
     }
 
     @Transactional
