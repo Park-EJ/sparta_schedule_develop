@@ -21,7 +21,7 @@ public class ScheduleController {
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> save(@RequestBody ScheduleRequestDto requestDto) {
         ScheduleResponseDto scheduleResponseDto = scheduleService.save(requestDto.getUsername(), requestDto.getTitle(), requestDto.getContents());
-        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.OK);
     }
 
     // Schedule 전체 조회
@@ -42,7 +42,7 @@ public class ScheduleController {
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateByUsername(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
         ScheduleResponseDto scheduleResponseDto = scheduleService.updateByUsername(id, requestDto.getUsername(), requestDto.getTitle(), requestDto.getContents());
-        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(scheduleResponseDto, HttpStatus.OK);
     }
 
     // Schedule 삭제

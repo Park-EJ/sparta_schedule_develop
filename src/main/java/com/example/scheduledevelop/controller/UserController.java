@@ -23,7 +23,7 @@ public class UserController {
     public ResponseEntity<UserSignUpResponseDto> signUp(@Valid @RequestBody UserSignUpRequestDto requestDto) {
         UserSignUpResponseDto userSignUpResponseDto =
                 userService.signUp(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
-        return new ResponseEntity<>(userSignUpResponseDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(userSignUpResponseDto, HttpStatus.OK);
     }
 
     // User 전체 조회
@@ -44,7 +44,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDto> updateById(@PathVariable Long id, @RequestBody UserRequestDto requestDto) {
         UserResponseDto userResponseDto = userService.updateById(id, requestDto.getUsername(), requestDto.getEmail());
-        return new ResponseEntity<>(userResponseDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
     // User 삭제
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     // 로그인
-    @PutMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserSignUpRequestDto requestDto, HttpSession session) {
         UserLoginResponseDto userLoginResponseDto = userService.login(requestDto.getEmail(), requestDto.getPassword(), session);
     return new ResponseEntity<>(userLoginResponseDto, HttpStatus.OK);
